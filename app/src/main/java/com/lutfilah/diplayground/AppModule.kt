@@ -1,8 +1,10 @@
 package com.lutfilah.diplayground
 
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 /* Anotasi @Module
 * Berguna untuk memberitahukan Hilt class yang diberikan anotasi merupakan modul dependency untuk Hilt
@@ -18,4 +20,20 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+    /* Membuat blueprint dari dependency-dependency yang dibutuhkan
+    * atau memberitahukan Hilt bagaimana dependency-dependencynya dibuat yang kemudian akan di inject
+    *
+    * Anotasi @Singleton
+    * beguna untuk memmberitahu kepada Hilt bahwa object tersebut hanya dibuat SATU KALI selama aplikasi berjalan
+    * ! SANGAT PENTING KARENA JIKA TIDAK ADA
+    * ! AKAN MEMBUAT OBJECT TERUS MENERUS KETIKA DI INJECT DAN AKAN TERJADI MEMORY LEAK
+    *
+    * Anotasi @Provides
+    * berguna untuk meberitahukan kepada Hilt bahwa ini adalah module yang disediakan untuk di inject ke class yang membutuhkan
+    */
+    @Singleton
+    @Provides
+    fun provideEngine(): Engine {
+        return Engine()
+    }
 }
