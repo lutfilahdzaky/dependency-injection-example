@@ -1,8 +1,10 @@
 package com.lutfilah.diplayground
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
@@ -31,11 +33,16 @@ object AppModule {
     *
     * Anotasi @Provides
     * berguna untuk meberitahukan kepada Hilt bahwa ini adalah module yang disediakan untuk di inject ke class yang membutuhkan
+    *
+    * Anotasi @ApplicationContext
+    * variabel yang diberikan anotasi ini akan diisi oleh context dari aplikasinya
     */
     @Singleton
     @Provides
-    fun provideEngine(): Engine {
-        return Engine()
+    fun provideEngine(
+        @ApplicationContext context: Context
+    ): Engine {
+        return Engine(context)
     }
 
     // injecting string examples for multiple use cases
