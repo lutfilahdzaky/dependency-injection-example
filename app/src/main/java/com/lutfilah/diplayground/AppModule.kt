@@ -40,10 +40,20 @@ object AppModule {
     @Singleton
     @Provides
     fun provideEngine(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        /* Menginject module dari module lain bisa seperti ini
+        *  gunakan anotasi @Named ketika keluarannya sama dalam case ini yaitu String
+        */
+        @Named("owner") owner: String
     ): Engine {
-        return Engine(context)
+        return Engine(context, owner)
     }
+
+    // for injecting module for module
+    @Singleton
+    @Provides
+    @Named("owner")
+    fun provideOwner() = "Lutfilah"
 
     // injecting string examples for multiple use cases
     // ketika ada modul dengan output yang sama, dapat dibedakan dengan anotasi @Named
