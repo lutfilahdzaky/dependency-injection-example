@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 /* Anotasi @Module
@@ -36,4 +37,16 @@ object AppModule {
     fun provideEngine(): Engine {
         return Engine()
     }
+
+    // injecting string examples for multiple use cases
+    // ketika ada modul dengan output yang sama, dapat dibedakan dengan anotasi @Named
+    @Singleton
+    @Provides
+    @Named("string")
+    fun provideString() = "This is string to inject"
+
+    @Singleton
+    @Provides
+    @Named("string2")
+    fun provideString2() = "This is string two to inject"
 }

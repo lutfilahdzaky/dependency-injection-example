@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.lutfilah.diplayground.ui.theme.DependencyInjectionPlaygroundTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 /* Anotasi @AndroidEntryPoint
 * Berguna untuk memberitahukan Hilt untuk menginject dependency ke class yang diberikan anotasi.
@@ -33,6 +34,16 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var engine: Engine
 
+    // injecting string examples for multiple use cases
+    // ketika ada modul dengan output yang sama, dapat dibedakan dengan anotasi @Named
+    @Inject
+    @Named("string")
+    lateinit var injectedString: String
+
+    @Inject
+    @Named("string2")
+    lateinit var injectedString2: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -52,6 +63,10 @@ class MainActivity : ComponentActivity() {
         */
 //        val engine = Engine()
         engine.startEngine()
+
+        // injecting string examples for multiple use cases
+        println(injectedString)
+        println(injectedString2)
     }
 }
 
