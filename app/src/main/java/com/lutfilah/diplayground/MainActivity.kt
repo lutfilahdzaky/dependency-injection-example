@@ -67,6 +67,9 @@ class MainActivity : ComponentActivity() {
         // injecting string examples for multiple use cases
         println(injectedString)
         println(injectedString2)
+
+        // for context injecting
+        engine.stopEngine()
     }
 }
 
