@@ -49,7 +49,7 @@ object AppModule {
         return Engine(context, owner)
     }
 
-    // for injecting module for module
+    // for injecting dependency for dependency
     @Singleton
     @Provides
     @Named("owner")
